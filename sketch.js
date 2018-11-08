@@ -1,18 +1,37 @@
+var symbol;
 
 function setup() {
     createCanvas(
-        window.innerWidth, 
+        window.innerWidth,
         window.innerHeight
-    );    
-  }
-  
-  function draw() {
-    if (mouseIsPressed) {
-      fill(0);
-    } else {
-      fill(255);
+    );
+    background(0);
+    symbol = new Symbol(
+        width / 2,
+        height / 2 
+    );
+
+    symbol.setToRandomSymbol();
+}
+
+function draw() {
+    symbol.render();
+}
+
+function Symbol(x,y){
+    this.x = x;
+    this.y = y;
+    this.value;
+
+    //get nepali/newari char instead
+    this.setToRandomSymbol = function(){
+        this.value = String.fromCharCode(
+            0x30A0 + round(random(0,96))
+        );
     }
 
-    ellipse(mouseX, mouseY, 80, 80);
-
+    this.render = function(){
+        fill(0,255,70)
+        text(this.value,this.x,this.y)
+    } 
 }
